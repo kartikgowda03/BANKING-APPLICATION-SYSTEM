@@ -1,0 +1,181 @@
+//Banking Application//
+
+
+#include <stdio.h>
+
+struct account
+{
+    int accNo;
+    char name[100];
+    int balance;
+    char city[100];
+};
+int main()
+{
+    int ch;
+
+    struct account acc;
+    struct account list[100];
+    
+    int n;
+
+    do
+    {
+        printf("\n\n1.To add Account holder.\n2.To display details of all the account in the bank.\n3.To withdraw an amount from an account using the account number.\n4.To deposit a particular amount to an account using the account number.\n5.Search Account Number\n6.Update details of account holder\n7.Delete Account holder\n0.To Exit\n\n");
+        printf("\n\nEnter your choice :");
+        scanf("%d", &ch);
+
+        if (ch == 1)
+        {
+
+            printf("\nEnter Number of Members you want to add :");
+            scanf("%d", &n);
+
+            for (int i = 0; i < n; i++)
+            {
+                printf("\n\nEnter Account number of member %d :", i + 1);
+                scanf("%d", &list[i].accNo);
+
+                printf("Enter Name :");
+                scanf("%s", list[i].name);
+
+                printf("Enter Balance :");
+                scanf("%d", &list[i].balance);
+
+                printf("Enter City :");
+                scanf("%s", list[i].city);
+            }
+        }
+        else if (ch == 2)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                printf("\n\n---------------MEMBER %d------------------", i + 1);
+                printf("\nAccount number -->%d", list[i].accNo);
+                printf("\nName -->%s", list[i].name);
+                printf("\nYour Balance-->%d", list[i].balance);
+                printf("\nCity -->%s", list[i].city);
+            }
+        }
+        else if (ch == 3)
+        {
+            int acc;
+            printf("\n\nEnter Your account number :");
+            scanf("%d", &acc);
+            for (int i = 0; i < n; i++)
+            {
+                if (list[i].accNo == acc)
+                {
+                    int amt;
+                    printf("Enter Amount you want to withdraw :");
+                    scanf("%d", &amt);
+                    if (amt > list[i].balance)
+                    {
+                        printf("\nINSUFFICIENT BALANCE\n");
+                        continue;
+                    }
+                    else
+                    {
+                        list[i].balance -= amt;
+                        printf("\nMONEY WITHDRAWN SUCESSFULLY !!!");
+                        printf("\nYOUR CURRENT BALANCE IS %d", list[i].balance);
+                    }
+                }
+            }
+        }
+        else if (ch == 4)
+        {
+            int acc;
+            printf("\n\nEnter Your account number :");
+            scanf("%d", &acc);
+            for (int i = 0; i < n; i++)
+            {
+                if (list[i].accNo == acc)
+                {
+                    int amt;
+                    printf("Enter Amount you want to Deposit :");
+                    scanf("%d", &amt);
+                    list[i].balance += amt;
+                    printf("\nMONEY DEPOSITED SUCESSFULLY !!!");
+                    printf("\nYOUR CURRENT BALANCE IS %d", list[i].balance);
+                }
+            }
+        }
+        else if (ch == 5)
+        {
+            int acc;
+            printf("\n\nEnter Your account number :");
+            scanf("%d", &acc);
+            for (int i = 0; i < n; i++)
+            {
+                if (list[i].accNo == acc)
+                {
+                    printf("\n\n---------------MEMBER %d------------------", i + 1);
+                    printf("\nAccount number -->%d", list[i].accNo);
+                    printf("\nName -->%s", list[i].name);
+                    printf("\nYour Balance-->%d", list[i].balance);
+                    printf("\nCity -->%s", list[i].city);
+                    printf("\n");
+                }
+            }
+        }
+        else if (ch == 6)
+        {
+            int acc;
+            printf("\n\nEnter Your account number :");
+            scanf("%d", &acc);
+            for (int i = 0; i < n; i++)
+            {
+                if (list[i].accNo == acc)
+                {
+                    printf("\n\nEnter UPDATED Account number of member %d :", i + 1);
+                    scanf("%d", &list[i].accNo);
+
+                    printf("Enter UPDATED Name :");
+                    scanf("%s", list[i].name);
+
+                    printf("Enter UPDATED Balance :");
+                    scanf("%d", &list[i].balance);
+
+                    printf("Enter UPDATED City :");
+                    scanf("%s", list[i].city);
+
+                    printf("DETAILS UPDATED SUCESSFULLY !!");
+                }
+            }
+        }
+        else if (ch == 7)
+        {
+            int acc;
+            int j = 0;
+            printf("\n\nEnter Your account number you want to delete :");
+            scanf("%d", &acc);
+            if (n == -1)
+            {
+                printf("NO ACCOUNT FOUND!!!");
+                continue;
+            }
+            for (int i = 0; i < n; i++)
+            {
+                if (list[i].accNo == acc)
+                {
+                    j = i;
+                    break;
+                }
+                else
+                {
+                    printf("NO ACCOUNT FOUND!!!");
+                    continue;
+                }
+            }
+            for (int i = j; i < n; i++)
+            {
+                list[i] = list[i + 1];
+            }
+            n--;
+        }
+
+    } while (ch != 0);
+
+    return 0;
+}
